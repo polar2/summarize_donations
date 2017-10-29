@@ -1,4 +1,4 @@
-# import useful libraries and functions
+# import useful libraries
 import os
 import sys
 from operator import itemgetter
@@ -18,21 +18,22 @@ def main():
 		for line in fp:
 			new_line = line.rstrip("\n").split('|')
 			if (len(new_line)!=21):
-				print("A line in the input data file does not match the expected input data format.")
+				print("The current line in the input data file does not match the expected input data format.")
 				continue
 			# ensure `CMTE_ID` and `TRANSACTION_AMT` fields are present and valid
 			if (len(new_line[0])==9):
 				CMTE_ID = new_line[0]
 			else:
-				print("A CMTE_ID field is invalid.")
+				print("CMTE_ID is invalid.")
 				continue
 			try:
 				TRANSACTION_AMT = float(new_line[14])
 			except ValueError:
-				print("A TRANSACTION_AMT is missing.")
+				print("TRANSACTION_AMT is missing.")
 				continue
 			# ensure `OTHER_ID` is set to empty
 			if (len(new_line[15])!=0):
+				print("OTHER_ID is not empty.")
 				continue
 			# reformat the `ZIP_CODE`
 			ZIP_CODE = new_line[10][0:5]
